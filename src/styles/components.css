@@ -1,0 +1,559 @@
+:root {
+  --primary-color: #00c6ff;
+  --primary-color-rgb: 0, 198, 255;
+  --secondary-color: #0072ff;
+  --secondary-color-rgb: 0, 114, 255;
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.7);
+  --background-dark: #000000;
+  --background-light: #ffffff;
+  --card-bg-dark: rgba(255, 255, 255, 0.1);
+  --card-bg-light: rgba(0, 0, 0, 0.05);
+  --card-border-dark: rgba(255, 255, 255, 0.2);
+  --card-border-light: rgba(0, 0, 0, 0.1);
+  --danger-color: #ff4444;
+  --warning-color: #ffd700;
+  --info-color: #00c6ff;
+  --border-radius-lg: 16px;
+  --border-radius-md: 12px;
+  --border-radius-sm: 8px;
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s ease;
+}
+
+[data-theme="dark"] {
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.7);
+  --background-color: var(--background-dark);
+  --card-bg: var(--card-bg-dark);
+  --card-border: var(--card-border-dark);
+}
+
+[data-theme="light"] {
+  --text-primary: #000000;
+  --text-secondary: rgba(0, 0, 0, 0.7);
+  --background-color: var(--background-light);
+  --card-bg: var(--card-bg-light);
+  --card-border: var(--card-border-light);
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  transition: background-color 0.3s ease;
+}
+
+.app-container {
+  min-height: 100vh;
+}
+
+.app-content {
+  min-height: 100vh;
+  background: linear-gradient(135deg, var(--background-dark), #1a1a1a);
+  color: var(--text-primary);
+}
+
+.app-header {
+  padding: 2rem;
+  background: transparent;
+  position: relative;
+}
+
+.header-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.app-header h1 {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.header-badge {
+  padding: 0.5rem 1rem;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 100px;
+  font-size: 0.875rem;
+  backdrop-filter: blur(10px);
+  color: var(--text-primary);
+}
+
+.theme-toggle {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  padding: 0.5rem;
+  border: none;
+  border-radius: 50%;
+  background: var(--card-bg);
+  color: var(--text-color);
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  z-index: 1000;
+}
+
+.theme-toggle:hover {
+  transform: scale(1.1);
+  background: var(--primary-color);
+  color: var(--card-bg);
+}
+
+.map-section {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 2rem;
+}
+
+.map-container {
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid var(--card-border);
+  background: var(--card-bg);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.weather-section {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.weather-card {
+  background: var(--card-bg);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--card-border);
+  border-radius: 20px;
+  padding: 2rem;
+  transition: all 0.3s ease;
+}
+
+.weather-card:hover {
+  transform: translateY(-5px);
+  background: rgba(var(--primary-color-rgb), 0.1);
+}
+
+.weather-card-header {
+  margin-bottom: 1.5rem;
+}
+
+.weather-card-header h2 {
+  margin: 0;
+  color: var(--text-primary);
+}
+
+.weather-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 1rem;
+}
+
+.weather-stat {
+  padding: 1.5rem;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 16px;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.weather-stat:hover {
+  background: rgba(var(--primary-color-rgb), 0.15);
+}
+
+.weather-stat-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: var(--primary-color);
+}
+
+.weather-stat-value {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.weather-stat-label {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.weather-alert {
+  background: var(--card-bg);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  border: 1px solid var(--card-border);
+  padding: 1.5rem;
+  margin: 1rem 2rem;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.weather-alert:hover {
+  transform: translateX(5px);
+}
+
+.weather-alert-warning {
+  border-left: 4px solid var(--warning-color);
+}
+
+.weather-alert-danger {
+  border-left: 4px solid var(--danger-color);
+}
+
+.weather-alert-info {
+  border-left: 4px solid var(--info-color);
+}
+
+.weather-alert-icon {
+  color: var(--text-primary);
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.weather-alert-content h3 {
+  color: #fff;
+  margin-bottom: 0.5rem;
+}
+
+.weather-alert-content p {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+@media (max-width: 768px) {
+  .header-content {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .app-header h1 {
+    font-size: 1.75rem;
+  }
+
+  .weather-section,
+  .map-section,
+  .search-container {
+    padding: 0 1rem;
+  }
+
+  .weather-card {
+    padding: 1.5rem;
+  }
+
+  .theme-toggle {
+    top: 1rem;
+    right: 1rem;
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-indicator {
+  background: var(--card-bg);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--card-border);
+  color: var(--text-primary);
+  border-radius: 20px;
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.loading-spinner {
+  width: 24px;
+  height: 24px;
+  border: 3px solid var(--primary-color);
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.error-message {
+  background: rgba(255, 59, 48, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 59, 48, 0.2);
+  color: #fff;
+  border-radius: 20px;
+  text-align: center;
+  padding: 1.5rem;
+  font-weight: 500;
+}
+
+.search-container {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 0 2rem;
+  position: relative;
+  z-index: 1000;
+}
+
+.search-input-container {
+  background: var(--card-bg);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--card-border);
+  border-radius: 100px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+.search-input-container:focus-within {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(var(--primary-color-rgb), 0.2);
+}
+
+.search-input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+  font-size: 1rem;
+  padding: 1.2rem 3rem;
+  outline: none;
+}
+
+.search-input::placeholder {
+  color: var(--text-secondary);
+}
+
+.search-icon {
+  position: absolute;
+  left: 1rem;
+  color: var(--text-secondary);
+  font-size: 1.2rem;
+}
+
+.clear-button {
+  position: absolute;
+  right: 1rem;
+  background: none;
+  border: none;
+  padding: 0.5rem;
+  cursor: pointer;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+}
+
+.clear-button:hover {
+  background: rgba(0, 0, 0, 0.05);
+  color: var(--text-primary);
+}
+
+.search-loading {
+  position: absolute;
+  right: 1rem;
+  color: var(--primary-color);
+}
+
+.search-results {
+  margin-top: 0.5rem;
+  background: var(--card-bg);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--card-border);
+  border-radius: 20px;
+  overflow: hidden;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.search-results::-webkit-scrollbar {
+  width: 6px;
+}
+
+.search-results::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.search-results::-webkit-scrollbar-thumb {
+  background-color: var(--primary-color);
+  border-radius: 3px;
+}
+
+.search-result-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.5rem;
+  background: transparent;
+  border: none;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  color: var(--text-primary);
+  transition: all 0.3s ease;
+}
+
+.search-result-item:hover,
+.search-result-item.highlighted {
+  background: rgba(var(--primary-color-rgb), 0.1);
+}
+
+.location-icon {
+  color: var(--primary-color);
+}
+
+.location-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  flex: 1;
+}
+
+.location-name {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.location-detail {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+}
+
+.intro-page {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  color: #fff;
+  overflow: hidden;
+}
+
+.intro-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  cursor: grab;
+}
+
+.intro-background:active {
+  cursor: grabbing;
+}
+
+.intro-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  pointer-events: none;
+}
+
+.intro-text {
+  padding: 4rem;
+  max-width: 600px;
+  pointer-events: auto;
+}
+
+.intro-text h1 {
+  font-size: 4.5rem;
+  line-height: 1;
+  margin: 0;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+.intro-text h1 .highlight {
+  display: block;
+  font-size: 5rem;
+  background: linear-gradient(135deg, #fff 0%, rgba(255, 255, 255, 0.7) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-top: 0.5rem;
+}
+
+.intro-text p {
+  font-size: 1.25rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 2rem 0 3rem;
+  font-weight: 400;
+  line-height: 1.5;
+  max-width: 400px;
+}
+
+.enter-button {
+  background: none;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 1rem 2rem;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 100px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  transition: all 0.3s ease;
+}
+
+.enter-button:hover {
+  background: #fff;
+  color: #000;
+  gap: 1.5rem;
+}
+
+.enter-button svg {
+  transition: transform 0.3s ease;
+}
+
+@media (max-width: 768px) {
+  .intro-text {
+    padding: 2rem;
+    text-align: left;
+  }
+
+  .intro-text h1 {
+    font-size: 3rem;
+  }
+
+  .intro-text h1 .highlight {
+    font-size: 3.5rem;
+  }
+
+  .intro-text p {
+    font-size: 1.1rem;
+  }
+}
